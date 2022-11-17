@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+import 'todo_page.dart';
+
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
 
@@ -24,6 +27,45 @@ class _MyFormPageState extends State<MyFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Form'),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: const Text('Counter'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Form'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyFormPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('To Do'),
+              onTap: () {
+                // Route menu ke halaman to do
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ToDoPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -187,7 +229,8 @@ class _MyFormPageState extends State<MyFormPage> {
                 ),
                 TextButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.blue[600]),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -199,85 +242,78 @@ class _MyFormPageState extends State<MyFormPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 15,
-                            child: Container(
-                              child: ListView(
-                                padding:
-                                    const EdgeInsets.only(top: 20, bottom: 20),
-                                shrinkWrap: true,
-                                children: <Widget>[
-                                  const Center(
+                            child: ListView(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                const Center(
+                                    child: Text(
+                                  'Informasi Data',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 73, 149, 192),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                )),
+                                const SizedBox(height: 20),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
                                       child: Text(
-                                    'Informasi Data',
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 153, 32, 32),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                        'Nama: $_namaLengkap',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ),
                                     ),
-                                  )),
-                                  const SizedBox(height: 20),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Text(
-                                          'Nama: $_namaLengkap',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Umur: ' '${umur.toInt()}',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Text(
-                                          'Umur: ' '${umur.toInt()}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Jenjang: ${jenjangSarjana ? 'Sarjana' : jenjangDiploma ? 'Diploma' : jenjangMagister ? 'Magister' : jenjangDoktor ? 'Doktor' : 'Undefined'}',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Text(
-                                          'Jenjang: ${jenjangSarjana ? 'Sarjana' : jenjangDiploma ? 'Diploma' : jenjangMagister ? 'Magister' : jenjangDoktor ? 'Doktor' : 'Undefined'}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Kelas PBP: $kelasPBP',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Text(
-                                          'Kelas PBP: $kelasPBP',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        'Practice Mode: ${_nilaiSwitch ? 'yes' : 'no'}',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Text(
-                                          'Practice Mode: ${_nilaiSwitch ? 'yes' : 'no'}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Kembali'),
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kembali'),
+                                ),
+                              ],
                             ),
                           );
                         },
